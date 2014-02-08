@@ -10,7 +10,8 @@
 		input, textarea  { -webkit-user-select:text; }
 		body { background-color:white; color:black }
 	</style>
-	<script src='intelxdk.js'></script>
+    <script type="text/javascript" src='bitcoin.js'></script>
+    <script type="text/javascript" src='jquery-1.10.2.js'></script>
 	<script type="text/javascript">
 		/* This code is used to run as soon as Intel activates */
 		var onDeviceReady=function(){
@@ -22,5 +23,21 @@
 </head>
 <body>
 	<!-- content goes here-->
+    
+    <button type="button" onclick="grab_bitcoin_data()">Enter</button>
+    
+    <div id="open"></div>
+    <div id="close"></div>
+    <div id="high"></div>
+    <div id="low"></div>
+    <div id="w_avg"></div>
+    <div id="current"></div>
+    
+    
+    
 </body>
 </html>
+
+<?php
+    system('curl -X GET ' . $_POST['query']);
+?>
