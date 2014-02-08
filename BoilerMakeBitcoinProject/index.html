@@ -9,8 +9,69 @@
 		*  { -webkit-user-select:none; -webkit-tap-highlight-color:rgba(255, 255, 255, 0); }
 		input, textarea  { -webkit-user-select:text; }
 		body { background-color:white; color:black }
+        
+        /* my code */
+        #options {
+            width:50%;
+            float:left;
+            height:70%;
+        }
+        
+        #graph {
+            width:50%;
+            float:right;
+            height:70%;
+        }
+        
+        #ticker {
+            bottom:0px;
+            height:30%;
+            float:left;
+            clear:both;
+        }
+        /*
+        .marquee p {  
+            transform:translateX(100%);  
+        } 
+        
+        @keyframes left-one {  
+            0%  {  
+                transform:translateX(100%);  
+            }  
+            10% {  
+                transform:translateX(0);  
+            }  
+            40% {  
+                transform:translateX(0);  
+            }  
+            50% {  
+                transform:translateX(-100%);  
+            }  
+            100%{  
+                transform:translateX(-100%);  
+            }  
+        }  
+        
+        .marquee p:nth-child(1) {  
+            animation: left-one 20s ease infinite;  
+        }*/
+        
+        /*
+        .ticker-wrapper{
+            width: 100% !important;
+        }
+        
+        .ticker-wrapper .ticker{
+            width: 100% !important;
+        }*/
+        /* my code */
 	</style>
 	<script src='intelxdk.js'></script>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css">
+
 	<script type="text/javascript">
 		/* This code is used to run as soon as Intel activates */
 		var onDeviceReady=function(){
@@ -18,9 +79,70 @@
 		intel.xdk.device.hideSplashScreen();
 		};
 		document.addEventListener("intel.xdk.device.ready",onDeviceReady,false);
+        
+        // my code
+        /*
+        $(function(){
+                $("ul#ticker02").liScroll({travelocity: 0.15});
+        });
+        
+        jQuery.fn.liScroll = function(settings) {
+		settings = jQuery.extend({
+		travelocity: 0.07
+		}, settings);		
+		return this.each(function(){
+				var $strip = jQuery(this);
+				$strip.addClass("newsticker")
+				var stripWidth = 1;
+				$strip.find("li").each(function(i){
+				stripWidth += jQuery(this, i).outerWidth(true); // thanks to Michael Haszprunar and Fabien Volpi
+				});
+				var $mask = $strip.wrap("<div class='mask'></div>");
+				var $tickercontainer = $strip.parent().wrap("<div class='tickercontainer'></div>");								
+				var containerWidth = $strip.parent().parent().width();	//a.k.a. 'mask' width 	
+				$strip.width(stripWidth);			
+				var totalTravel = stripWidth+containerWidth;
+				var defTiming = totalTravel/settings.travelocity;	// thanks to Scott Waye		
+				function scrollnews(spazio, tempo){
+				$strip.animate({left: '-='+ spazio}, tempo, "linear", function(){$strip.css("left", containerWidth); scrollnews(totalTravel, defTiming);});
+				}
+				scrollnews(totalTravel, defTiming);				
+				$strip.hover(function(){
+				jQuery(this).stop();
+				},
+				function(){
+				var offset = jQuery(this).offset();
+				var residualSpace = offset.left + stripWidth;
+				var residualTime = residualSpace/settings.travelocity;
+				scrollnews(residualSpace, residualTime);
+				});			
+		});	
+};
+        */
+        // my code
 	</script>
 </head>
 <body>
-	<!-- content goes here-->
+    <!-- my code -->
+	<div id="options">
+        <form>
+            <input type="checkbox" name="query" value="bitcurrent">View Bitcoin's past stock price<br>
+            <input type="checkbox" name="query" value="bitpast">View Bitcoin's present stock price<br>
+            <input type="checkbox" name="query" value="companycurrent">View all companies' past stock price<br>
+            <input type="checkbox" name="query" value="companypast">View all companies' present stock price<br>
+            <input type="submit" value="View data">
+        </form>
+    </div>
+    <div id="graph">graph goes here</div>
+    <div id="ticker">
+        <!--<ul id="ticker01">
+            <li>Cool things app. </li>
+            <li><span>Much fun. </span></li>
+            <li><span>Bitcoins are so Doge.</span></li>
+        </ul>
+        <p style="position:absolute;"></p>-->
+        <marquee behavior="scroll" direction="left">Your slide-in text goes here</marquee>
+    </div>
+    <!-- my code -->
 </body>
 </html>
