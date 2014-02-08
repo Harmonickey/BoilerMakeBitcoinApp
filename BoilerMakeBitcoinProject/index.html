@@ -72,6 +72,7 @@
     <script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
     <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css">
 
+    <script type="text/javascript" src='bitcoin.js'></script>
 	<script type="text/javascript">
 		/* This code is used to run as soon as Intel activates */
 		var onDeviceReady=function(){
@@ -81,44 +82,6 @@
 		document.addEventListener("intel.xdk.device.ready",onDeviceReady,false);
         
         // my code
-        /*
-        $(function(){
-                $("ul#ticker02").liScroll({travelocity: 0.15});
-        });
-        
-        jQuery.fn.liScroll = function(settings) {
-		settings = jQuery.extend({
-		travelocity: 0.07
-		}, settings);		
-		return this.each(function(){
-				var $strip = jQuery(this);
-				$strip.addClass("newsticker")
-				var stripWidth = 1;
-				$strip.find("li").each(function(i){
-				stripWidth += jQuery(this, i).outerWidth(true); // thanks to Michael Haszprunar and Fabien Volpi
-				});
-				var $mask = $strip.wrap("<div class='mask'></div>");
-				var $tickercontainer = $strip.parent().wrap("<div class='tickercontainer'></div>");								
-				var containerWidth = $strip.parent().parent().width();	//a.k.a. 'mask' width 	
-				$strip.width(stripWidth);			
-				var totalTravel = stripWidth+containerWidth;
-				var defTiming = totalTravel/settings.travelocity;	// thanks to Scott Waye		
-				function scrollnews(spazio, tempo){
-				$strip.animate({left: '-='+ spazio}, tempo, "linear", function(){$strip.css("left", containerWidth); scrollnews(totalTravel, defTiming);});
-				}
-				scrollnews(totalTravel, defTiming);				
-				$strip.hover(function(){
-				jQuery(this).stop();
-				},
-				function(){
-				var offset = jQuery(this).offset();
-				var residualSpace = offset.left + stripWidth;
-				var residualTime = residualSpace/settings.travelocity;
-				scrollnews(residualSpace, residualTime);
-				});			
-		});	
-};
-        */
         // my code
 	</script>
 </head>
@@ -144,5 +107,19 @@
         <marquee behavior="scroll" direction="left">Your slide-in text goes here</marquee>
     </div>
     <!-- my code -->
+	<!-- content goes here-->
+    
+    <button type="button" onclick="grab_bitcoin_data()">Enter</button>
+    
+    <div id="open"></div>
+    <div id="close"></div>
+    <div id="high"></div>
+    <div id="low"></div>
+    <div id="w_avg"></div>
+    <div id="current"></div>
+    
+    
+    
 </body>
 </html>
+
