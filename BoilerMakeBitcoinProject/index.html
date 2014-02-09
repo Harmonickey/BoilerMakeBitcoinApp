@@ -9,9 +9,74 @@
 		*  { -webkit-user-select:none; -webkit-tap-highlight-color:rgba(255, 255, 255, 0); }
 		input, textarea  { -webkit-user-select:text; }
 		body { background-color:white; color:black }
+        
+        /* my code */
+        #options {
+            width:50%;
+            float:left;
+            height:70%;
+        }
+        
+        #graph {
+            width:50%;
+            float:right;
+            height:70%;
+        }
+        
+        #ticker {
+            bottom:0px;
+            height:30%;
+            width:100%;
+            float:right;
+            clear:both;
+        }
+        
+        canvas {
+        }
+        /*
+        .marquee p {  
+            transform:translateX(100%);  
+        } 
+        
+        @keyframes left-one {  
+            0%  {  
+                transform:translateX(100%);  
+            }  
+            10% {  
+                transform:translateX(0);  
+            }  
+            40% {  
+                transform:translateX(0);  
+            }  
+            50% {  
+                transform:translateX(-100%);  
+            }  
+            100%{  
+                transform:translateX(-100%);  
+            }  
+        }  
+        
+        .marquee p:nth-child(1) {  
+            animation: left-one 20s ease infinite;  
+        }*/
+        
+        /*
+        .ticker-wrapper{
+            width: 100% !important;
+        }
+        
+        .ticker-wrapper .ticker{
+            width: 100% !important;
+        }*/
+        /* my code */
 	</style>
+	<script src='intelxdk.js'></script>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css">
+
     <script type="text/javascript" src='bitcoin.js'></script>
-    <script type="text/javascript" src='jquery-1.10.2.js'></script>
 	<script type="text/javascript">
 		/* This code is used to run as soon as Intel activates */
 		var onDeviceReady=function(){
@@ -19,25 +84,82 @@
 		intel.xdk.device.hideSplashScreen();
 		};
 		document.addEventListener("intel.xdk.device.ready",onDeviceReady,false);
+        
+        // my code
+        // my code
 	</script>
+    <script src="Chart.js/Chart.js"></script>
+    <meta name = "viewport" content = "initial-scale = 1, user-scalable = no">
 </head>
 <body>
+    <!-- my code -->
+	<div id="options">
+        <form>
+            <input type="checkbox" name="query" value="bitcurrent">View Bitcoin's past stock price<br>
+            <input type="checkbox" name="query" value="bitpast">View Bitcoin's present stock price<br>
+            <input type="checkbox" name="query" value="companycurrent">View all companies' past stock price<br>
+            <input type="checkbox" name="query" value="companypast">View all companies' present stock price<br>
+            <input type="submit" value="View data">
+        </form>
+    </div>
+    <div id="graph">
+        <canvas id="myChart" width="400" height="400">
+    </div>
+    <script>
+        /*
+        company = "ZNGA", date="20140206"
+        $.ajax({
+            type:'POST',
+            url: "SimpleHistoryExample.py 10.8.8.1 "+company+" "+date,
+            success: function(response){
+                console.log(response);
+            }
+        });
+        */
+        var data = {
+            labels : ["January","February","March","April","May","June","July"],
+            datasets : [
+		      {
+			     fillColor : "rgba(220,220,220,0.5)",
+			     strokeColor : "rgba(220,220,220,1)",
+			     data : [65,59,90,81,56,55,40]
+		      },
+		      {
+			     fillColor : "rgba(151,187,205,0.5)",
+			     strokeColor : "rgba(151,187,205,1)",
+			     data : [28,48,40,19,96,27,100]
+		      }
+	       ]
+        }
+        /*var ctx = document.getElementById("myChart").getContext("2d");
+        var myNewChart = new Chart(ctx).Bar(data);*/
+        console.log($("#myChart"));
+        var ctx = new Chart($("#myChart").get(0).getContext("2d")).Bar(data);
+        
+    </script>
+    <div id="ticker">
+        <!--<ul id="ticker01">
+            <li>Cool things app. </li>
+            <li><span>Much fun. </span></li>
+            <li><span>Bitcoins are so Doge.</span></li>
+        </ul>
+        <p style="position:absolute;"></p>-->
+        <marquee behavior="scroll" direction="left">Your slide-in text goes here</marquee>
+    </div>
+    <!-- my code -->
 	<!-- content goes here-->
     
     <button type="button" onclick="grab_bitcoin_data()">Enter</button>
     
-    <div id="open"></div>
-    <div id="close"></div>
-    <div id="high"></div>
-    <div id="low"></div>
-    <div id="w_avg"></div>
-    <div id="current"></div>
+    <div id="open">1.</div>
+    <div id="close">2.</div>
+    <div id="high">3.</div>
+    <div id="low">4.</div>
+    <div id="w_avg">5.</div>
+    <div id="current">6.</div>
     
     
     
 </body>
 </html>
 
-<?php
-    system('curl -X GET ' . $_POST['query']);
-?>
