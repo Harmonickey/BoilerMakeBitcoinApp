@@ -1,5 +1,9 @@
 // JavaScript Document
 
+$(function(){
+    grab_bitcoin_data();
+});
+
 function validation(element)
 {
 	var $cc = $("#cc");
@@ -31,6 +35,30 @@ function grab_bitcoin_data()
 	var url_chain = 'http://www.quandl.com/api/v1/datasets/BCHAIN/MKPRU.json';
 	var url_weighted = 'http://api.bitcoincharts.com/v1/weighted_prices.json';
 	
+    
+var loaded = 0;
+var Chartdata = {
+	labels : ["January","February","March","April","May","June","July"],
+	datasets : [
+	  {
+		 fillColor : "rgba(220,220,220,0.5)",     //open, high, low
+		 strokeColor : "rgba(220,220,220,1)",     //bt past
+		 bardata : [850.56, 902.07, 799.13]
+	  },
+	  {
+		 fillColor : "rgba(151,187,205,0.5)",
+		 strokeColor : "rgba(151,187,205,1)",     //bt present
+		 bardata : []
+	  },
+	  {
+		 fillColor : "rgba(151,187,205,0.5)",
+		 strokeColor : "rgba(151,187,205,1)",     //company past
+		 bardata : [20.54,23.16,19.8]
+	  }
+   ]
+}
+
+    
 	var data_ochl = {
 		trim_start: get_today(),
 		sort_order: 'desc',
@@ -43,10 +71,9 @@ function grab_bitcoin_data()
 		$('#high').text(response.data[0][2]);
 		$('#low').text(response.data[0][3]);
 		
-		data.datasets[2].push(response.data[0][1]);
-		data.datasets[2].push(response.data[0][4]);
-		data.datasets[2].push(response.data[0][2]);
-		data.datasets[2].push(response.data[0][3]);
+		Chartdata.datasets[1].bardata.push(response.data[0][1]);
+		Chartdata.datasets[1].bardata.push(response.data[0][2]);
+		Chartdata.datasets[1].bardata.push(response.data[0][3]);
 	}, 'json');
 	
 	grab_weeklyavg();
@@ -98,33 +125,6 @@ function grab_bitcoin_data()
 		return date;
 	}
 	
-}
-
-var loaded = 0;
-var data = {
-	labels : ["January","February","March","April","May","June","July"],
-	datasets : [
-	  {
-		 fillColor : "rgba(220,220,220,0.5)",
-		 strokeColor : "rgba(220,220,220,1)",
-		 data : []
-	  },
-	  {
-		 fillColor : "rgba(151,187,205,0.5)",
-		 strokeColor : "rgba(151,187,205,1)",
-		 data : []
-	  },
-	  {
-		 fillColor : "rgba(151,187,205,0.5)",
-		 strokeColor : "rgba(151,187,205,1)",
-		 data : []
-	  },
-	  {
-		 fillColor : "rgba(151,187,205,0.5)",
-		 strokeColor : "rgba(151,187,205,1)",
-		 data : []
-	  }
-   ]
 }
 
 // my code

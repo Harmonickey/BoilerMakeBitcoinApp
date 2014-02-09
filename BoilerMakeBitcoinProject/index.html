@@ -12,19 +12,12 @@
 			background-color:white; 
 			color:black ;
 			width: 99%;
-			height: 700px;
-			border-style: outset;
-			-moz-box-shadow:    3px 3px 5px 6px #ccc;
-			-webkit-box-shadow: 3px 3px 5px 6px #ccc;
-			box-shadow:         3px 3px 5px 6px #ccc;
-			border-radius: 5px;
 		}
 		
 		#wrapper {
 			width: 80%;
-			height: 650px;
 			margin: 0 auto;	
-			margin-top: 60px;
+			margin-top: 30px;
 		}
 		
 		.query {
@@ -36,27 +29,24 @@
         #options {
             width:50%;
             float:left;
-            height: 150px;
         }
         
         #graph {
             width:50%;
             float:right;
-            height:45%;
         }
         
         #ticker {
-            bottom:30px;
             width:100%;
             float:right;
             clear:both;
+            margin-bottom:80px
         }
         
         canvas {
         }
 		
 		#comp_choose {
-			margin-right: 20px;	
 			position: absolute;
 		}
 		
@@ -131,11 +121,6 @@
         </form>
     </div>
     
-    <select id="comp_choose">
-    	<option value="Overstock">Overstock
-        <option value="Zynga">Zynga
-        <option value="Tesla">Tesla
-    </select>
     <div id="graph">
         <canvas id="myChart" width="400" height="400">
     </div>
@@ -156,32 +141,34 @@
 			}
         });
 		
-		
+		var data = {
+	labels : ["January","February","March","April","May","June","July"],
+	datasets : [
+		{
+			fillColor : "rgba(220,220,220,0.5)",
+			strokeColor : "rgba(220,220,220,1)",
+			pointColor : "rgba(220,220,220,1)",
+			pointStrokeColor : "#fff",
+			data : [65,59,90,81,56,55,40]
+		},
+		{
+			fillColor : "rgba(151,187,205,0.5)",
+			strokeColor : "rgba(151,187,205,1)",
+			pointColor : "rgba(151,187,205,1)",
+			pointStrokeColor : "#fff",
+			data : [28,48,40,19,96,27,100]
+		}
+	]
+}
         
-        
+        var ctx = document.getElementById("myChart").getContext("2d");
+var myNewChart = new Chart(ctx).Bar(data);
         
         
     </script>
-    <button type="button" onclick="grab_bitcoin_data()" id="enter_btn">Enter</button>
+        
     <div id="bitcoin_shortview">
-    <div>
-   	<label for="open">Open:</label><div id="open"></div>
-    </div>
-    <div>
-    <label for="close">Close:</label><div id="close"></div>
-    </div>
-    <div>
-    <label for="high">Hight:</label><div id="high"></div>
-    </div>
-    <div>
-    <label for="low">Low:</label><div id="low"></div>
-    </div>
-    <div>
-    <label for="w_avg">Avg:</label><div id="w_avg"></div>
-    </div>
-    <div>
-    <label for="current">Current:</label><div id="current"></div>
-    </div>
+    
     </div>
     <div id="currents">
     	
@@ -200,11 +187,10 @@
 	<!-- content goes here-->
     
     <script type="text/javascript">
-        document.getElementById("mq").innerHTML = "Sexy new text!";
+        document.getElementById("mq").innerHTML = "Data Banner";
         //$p = $("#mq");
         //$p.text("new string");
     </script>
-    <button type="button" onclick="grab_bitcoin_data()">Enter</button>
     
     
     
