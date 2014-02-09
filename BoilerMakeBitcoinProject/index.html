@@ -106,16 +106,22 @@
         <canvas id="myChart" width="400" height="400">
     </div>
     <script>
-        /*
-        company = "ZNGA", date="20140206"
+       
+	   var company = "TSLA";
+	   var date = "20130920";
+	   
         $.ajax({
             type:'POST',
-            url: "SimpleHistoryExample.py 10.8.8.1 "+company+" "+date,
-            success: function(response){
-                console.log(response);
-            }
+            url: "save.php",
+			data: {
+				type: 'python',
+				ip: '10.8.8.1',
+				port: '8194',
+				comp: company,
+				date: date
+			}
         });
-        */
+        
         var data = {
             labels : ["January","February","March","April","May","June","July"],
             datasets : [

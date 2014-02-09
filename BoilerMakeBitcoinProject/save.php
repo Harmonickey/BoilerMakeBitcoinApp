@@ -6,5 +6,12 @@
 </head>
 
 <body>
+
+<?php
+	if ($_POST['type'] == 'python')
+	{
+			system('python SimpleFieldSearchExample.py $_POST["ip"] $_POST["port"] $_POST["comp"] $_POST["date"] > save.txt');	
+	}
+?>
 </body>
 </html>
