@@ -40,7 +40,7 @@ def parseCmdLine():
 
 def main():
     #options = parseCmdLine()
-    print "My args {}\n\n".format([arg for arg in sys.argv])
+    # print "My args {}\n\n".format([arg for arg in sys.argv])
     #exit
     #print "Here printing cmd line args --> {}\n\n".format(options) 
     # Fill SessionOptions
@@ -54,13 +54,13 @@ def main():
 
     # Start a Session
     if not session.start():
-        print "Failed to start session."
+        # print "Failed to start session."
         return
 
     try:
         # Open service to get historical data from
         if not session.openService("//blp/refdata"):
-            print "Failed to open //blp/refdata"
+            # print "Failed to open //blp/refdata"
             return
 
         # Obtain previously opened service
@@ -77,7 +77,7 @@ def main():
 	request.getElement("fields").appendValue("PRICE_PREVIOUS_CLOSE_RT")
         request.set("periodicityAdjustment", "ACTUAL")
         request.set("periodicitySelection", "WEEKLY")
-        print "Date: {}\n\n".format(sys.argv[4])
+        # print "Date: {}\n\n".format(sys.argv[4])
         request.set("startDate", sys.argv[4])
         request.set("endDate", sys.argv[4])
         request.set("maxDataPoints", 100)
@@ -101,11 +101,11 @@ def main():
         session.stop()
 
 if __name__ == "__main__":
-    print "SimpleHistoryExample"
+    # print "SimpleHistoryExample"
     try:
         main()
     except KeyboardInterrupt:
-        print "Ctrl+C pressed. Stopping..."
+        # print "Ctrl+C pressed. Stopping..."
 
 __copyright__ = """
 Copyright 2012. Bloomberg Finance L.P.

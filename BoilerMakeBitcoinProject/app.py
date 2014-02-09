@@ -14,8 +14,11 @@ my_form = web.form.Form(
 
 class tutorial:
    def GET(self):
-       form = my_form()
-       return render.tutorial(form, "Your text goes here.")
+		parsed_path = urlparse.urlparse(self.path)
+    	try:
+        	params = dict([p.split('=') for p in parsed_path[4].split('&')])
+    	except:
+        	params = {}
         
    def POST(self):
        form = my_form()

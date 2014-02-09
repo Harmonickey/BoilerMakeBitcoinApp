@@ -6,26 +6,47 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
 	<style type="text/css">
 		/* Prevent copy paste for all elements except text fields */
-		*  { -webkit-user-select:none; -webkit-tap-highlight-color:rgba(255, 255, 255, 0); }
+		*  {  -webkit-tap-highlight-color:rgba(255, 255, 255, 0); }
 		input, textarea  { -webkit-user-select:text; }
-		body { background-color:white; color:black }
+		body { 
+			background-color:white; 
+			color:black ;
+			width: 99%;
+			height: 700px;
+			border-style: outset;
+			-moz-box-shadow:    3px 3px 5px 6px #ccc;
+			-webkit-box-shadow: 3px 3px 5px 6px #ccc;
+			box-shadow:         3px 3px 5px 6px #ccc;
+			border-radius: 5px;
+		}
+		
+		#wrapper {
+			width: 80%;
+			height: 650px;
+			margin: 0 auto;	
+			margin-top: 60px;
+		}
+		
+		.query {
+			margin-bottom: 10px;	
+			font-size: 16px;
+		}
         
         /* my code */
         #options {
             width:50%;
             float:left;
-            height:70%;
+            height: 150px;
         }
         
         #graph {
             width:50%;
             float:right;
-            height:70%;
+            height:45%;
         }
         
         #ticker {
-            bottom:0px;
-            height:30%;
+            bottom:30px;
             width:100%;
             float:right;
             clear:both;
@@ -33,50 +54,57 @@
         
         canvas {
         }
-        /*
-        .marquee p {  
-            transform:translateX(100%);  
-        } 
-        
-        @keyframes left-one {  
-            0%  {  
-                transform:translateX(100%);  
-            }  
-            10% {  
-                transform:translateX(0);  
-            }  
-            40% {  
-                transform:translateX(0);  
-            }  
-            50% {  
-                transform:translateX(-100%);  
-            }  
-            100%{  
-                transform:translateX(-100%);  
-            }  
-        }  
-        
-        .marquee p:nth-child(1) {  
-            animation: left-one 20s ease infinite;  
-        }*/
-        
-        /*
-        .ticker-wrapper{
-            width: 100% !important;
-        }
-        
-        .ticker-wrapper .ticker{
-            width: 100% !important;
-        }*/
-        /* my code */
+		
+		#comp_choose {
+			margin-right: 20px;	
+			position: absolute;
+		}
+		
+		#enter_btn {
+			float: left;	
+			height: 30px;
+			width: 60px;
+		}
+		
+		#currents {
+			float: left;
+			width: 250px;
+			height: 250px;
+			clear: left;	
+		}
+		
+		#bitcoin_shortview > label,
+		#bitcoin_shortview > div {
+			float: left;
+			clear: both;	
+		}
+		
+		#bitcoin_shortview.div.div {
+			float: left;	
+		}
+		
+		#bitcoin_shortview.div.label {
+			float: left;	
+		}
+		
+		#bitcoin_shortview.div {
+			float: none;
+			clear: none;	
+		}
+		
+		#bitcoin_shortview {
+			float: left;
+			width: 160px;
+		}
+		
 	</style>
 	<script src='intelxdk.js'></script>
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
     <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css">
-
     <script type="text/javascript" src='bitcoin.js'></script>
+    
 	<script type="text/javascript">
 		/* This code is used to run as soon as Intel activates */
 		var onDeviceReady=function(){
@@ -86,22 +114,28 @@
 		document.addEventListener("intel.xdk.device.ready",onDeviceReady,false);
         
         // my code
-        // my code
 	</script>
     <script src="Chart.js/Chart.js"></script>
     <meta name = "viewport" content = "initial-scale = 1, user-scalable = no">
 </head>
 <body>
     <!-- my code -->
+    <div id="wrapper">
 	<div id="options">
-        <form>
+        <form style="width: 300px;">
             <input type="checkbox" name="query" value="bitcurrent">View Bitcoin's past stock price<br>
             <input type="checkbox" name="query" value="bitpast">View Bitcoin's present stock price<br>
-            <input type="checkbox" name="query" value="companycurrent">View all companies' past stock price<br>
-            <input type="checkbox" name="query" value="companypast">View all companies' present stock price<br>
-            <input type="submit" value="View data">
+            <input id="cc" type="checkbox" name="query" value="companycurrent" onclick="validation(this)">View all companies' past stock price<br>
+            <input id="cp" type="checkbox" name="query" value="companypast" onclick="validation(this)">View all companies' present stock price<br>
+            <input height="30" width="70" type="submit" value="View data">
         </form>
     </div>
+    
+    <select id="comp_choose">
+    	<option value="Overstock">Overstock
+        <option value="Zynga">Zynga
+        <option value="Tesla">Tesla
+    </select>
     <div id="graph">
         <canvas id="myChart" width="400" height="400">
     </div>
@@ -121,28 +155,36 @@
 				date: date
 			}
         });
+		
+		
         
-        var data = {
-            labels : ["January","February","March","April","May","June","July"],
-            datasets : [
-		      {
-			     fillColor : "rgba(220,220,220,0.5)",
-			     strokeColor : "rgba(220,220,220,1)",
-			     data : [65,59,90,81,56,55,40]
-		      },
-		      {
-			     fillColor : "rgba(151,187,205,0.5)",
-			     strokeColor : "rgba(151,187,205,1)",
-			     data : [28,48,40,19,96,27,100]
-		      }
-	       ]
-        }
-        /*var ctx = document.getElementById("myChart").getContext("2d");
-        var myNewChart = new Chart(ctx).Bar(data);*/
-        console.log($("#myChart"));
-        var ctx = new Chart($("#myChart").get(0).getContext("2d")).Bar(data);
+        
         
     </script>
+    <button type="button" onclick="grab_bitcoin_data()" id="enter_btn">Enter</button>
+    <div id="bitcoin_shortview">
+    <div>
+   	<label for="open">Open:</label><div id="open"></div>
+    </div>
+    <div>
+    <label for="close">Close:</label><div id="close"></div>
+    </div>
+    <div>
+    <label for="high">Hight:</label><div id="high"></div>
+    </div>
+    <div>
+    <label for="low">Low:</label><div id="low"></div>
+    </div>
+    <div>
+    <label for="w_avg">Avg:</label><div id="w_avg"></div>
+    </div>
+    <div>
+    <label for="current">Current:</label><div id="current"></div>
+    </div>
+    </div>
+    <div id="currents">
+    	
+    </div>
     <div id="ticker">
         <!--<ul id="ticker01">
             <li>Cool things app. </li>
@@ -152,17 +194,9 @@
         <p style="position:absolute;"></p>-->
         <marquee behavior="scroll" direction="left"><input type="text" id="mq" disabled placeholder="Can't edit!" ></marquee>
     </div>
+    </div>
     <!-- my code -->
-	<!-- content goes here-->
     
-    <button type="button" onclick="grab_bitcoin_data()">Enter</button>
-    
-    <div id="open">1.</div>
-    <div id="close">2.</div>
-    <div id="high">3.</div>
-    <div id="low">4.</div>
-    <div id="w_avg">5.</div>
-    <div id="current">6.</div>
     
     
     

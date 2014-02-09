@@ -1,0 +1,72 @@
+SimpleHistoryExample
+My args ['SimpleHistoryExample.py', '10.8.8.1', '8194', 'ZNGA', '20140206']
+
+
+Connecting to 10.8.8.1:8194
+Date: 20140206
+
+
+Sending Request: HistoricalDataRequest = {
+    securities[] = {
+        "ZNGA US Equity"
+    }
+    fields[] = {
+        "VMAP", "HIGH", "LOW", "OPEN", "PRICE_PREVIOUS_CLOSE_RT"
+    }
+    periodicityAdjustment = ACTUAL
+    periodicitySelection = WEEKLY
+    startDate = "20140206"
+    endDate = "20140206"
+    maxDataPoints = 100
+}
+
+SessionConnectionUp = {
+    server = "10.8.8.1:8194"
+}
+
+SessionStarted = {
+}
+
+ServiceOpened = {
+    serviceName = "//blp/refdata"
+}
+
+HistoricalDataResponse = {
+    securityData = {
+        security = "ZNGA US Equity"
+        eidData[] = {
+        }
+        sequenceNumber = 0
+        fieldExceptions[] = {
+            fieldExceptions = {
+                fieldId = "VMAP"
+                errorInfo = {
+                    source = "943::bbdbh24"
+                    code = 1
+                    category = "BAD_FLD"
+                    message = "Invalid field"
+                    subcategory = "NOT_APPLICABLE_TO_HIST_DATA"
+                }
+            }
+            fieldExceptions = {
+                fieldId = "PRICE_PREVIOUS_CLOSE_RT"
+                errorInfo = {
+                    source = "943::bbdbh24"
+                    code = 1
+                    category = "BAD_FLD"
+                    message = "Not valid historical field"
+                    subcategory = "NOT_APPLICABLE_TO_HIST_DATA"
+                }
+            }
+        }
+        fieldData[] = {
+            fieldData = {
+                date = 2014-02-06
+                HIGH = 4.970000
+                LOW = 4.100000
+                OPEN = 4.250000
+            }
+        }
+    }
+}
+
