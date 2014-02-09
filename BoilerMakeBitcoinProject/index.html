@@ -12,7 +12,7 @@
 			background-color:white; 
 			color:black ;
 			width: 99%;
-			height: 700px;
+			height: 600px;
 			border-style: outset;
 			-moz-box-shadow:    3px 3px 5px 6px #ccc;
 			-webkit-box-shadow: 3px 3px 5px 6px #ccc;
@@ -22,7 +22,7 @@
 		
 		#wrapper {
 			width: 80%;
-			height: 650px;
+			height: 600px;
 			margin: 0 auto;	
 			margin-top: 60px;
 		}
@@ -42,14 +42,15 @@
         #graph {
             width:50%;
             float:right;
-            height:45%;
         }
         
         #ticker {
-            bottom:30px;
             width:100%;
             float:right;
             clear:both;
+			margin-bottom: 100px;
+			position: absolute;
+			top: 500px;
         }
         
         canvas {
@@ -162,6 +163,7 @@
         
         
     </script>
+    <!--
     <button type="button" onclick="grab_bitcoin_data()" id="enter_btn">Enter</button>
     <div id="bitcoin_shortview">
     <div>
@@ -179,9 +181,11 @@
     <div>
     <label for="w_avg">Avg:</label><div id="w_avg"></div>
     </div>
-    <div>
+    -->
+    <!--<div>
     <label for="current">Current:</label><div id="current"></div>
-    </div>
+    </div>-->
+    
     </div>
     <div id="currents">
     	
@@ -198,13 +202,11 @@
     </div>
     <!-- my code -->
 	<!-- content goes here-->
-    
     <script type="text/javascript">
-        document.getElementById("mq").innerHTML = "Sexy new text!";
+        document.getElementById("mq").innerHTML = "CURRENT: 689.62476";
         //$p = $("#mq");
         //$p.text("new string");
     </script>
-    <button type="button" onclick="grab_bitcoin_data()">Enter</button>
     
     
     
