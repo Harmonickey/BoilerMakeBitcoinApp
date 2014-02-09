@@ -142,6 +142,7 @@
         console.log($("#myChart"));
         var ctx = new Chart($("#myChart").get(0).getContext("2d")).Bar(data);
         
+        
     </script>
     <div id="ticker">
         <!--<ul id="ticker01">
@@ -150,11 +151,16 @@
             <li><span>Bitcoins are so Doge.</span></li>
         </ul>
         <p style="position:absolute;"></p>-->
-        <marquee behavior="scroll" direction="left"><input type="text" id="mq" disabled placeholder="Can't edit!" ></marquee>
+        <marquee behavior="scroll" direction="left"><p id="mq">Your slide-in text goes here</p></marquee>
     </div>
     <!-- my code -->
 	<!-- content goes here-->
     
+    <script type="text/javascript">
+        document.getElementById("mq").innerHTML = "Sexy new text!";
+        //$p = $("#mq");
+        //$p.text("new string");
+    </script>
     <button type="button" onclick="grab_bitcoin_data()">Enter</button>
     
     <div id="open">1.</div>
