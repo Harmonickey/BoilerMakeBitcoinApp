@@ -66,6 +66,7 @@ var Chartdata = {
 	};
 	
 	$.get(url_ochl, data_ochl, function(response) {
+<<<<<<< HEAD
 		$('#open').text(response.data[0][1]);
 		$('#close').text(response.data[0][4]);
 		$('#high').text(response.data[0][2]);
@@ -74,6 +75,27 @@ var Chartdata = {
 		Chartdata.datasets[1].bardata.push(response.data[0][1]);
 		Chartdata.datasets[1].bardata.push(response.data[0][2]);
 		Chartdata.datasets[1].bardata.push(response.data[0][3]);
+=======
+		if (response.data[0])
+		{
+			$('#open').text(response.data[0][1]);
+			$('#close').text(response.data[0][4]);
+			$('#high').text(response.data[0][2]);
+			$('#low').text(response.data[0][3]);
+			
+			if (response.data[0][1])
+				data.datasets[1].data.push(parseInt(response.data[0][1]));
+				
+			//if (response.data[0][4])
+				//data.datasets[2].data.push(parseInt(response.data[0][4]));
+			
+			if (response.data[0][2])
+				data.datasets[1].data.push(parseInt(response.data[0][2]));
+			
+			if (response.data[0][2])
+				data.datasets[1].data.push(parseInt(response.data[0][3]));
+		}
+>>>>>>> 4e2b444c88b978dd6ac8feb30924b32da9422853
 	}, 'json');
 	
 	grab_weeklyavg();
@@ -85,7 +107,8 @@ var Chartdata = {
 		$.get(url_weighted, function(response) {
 			average = response.USD['7d'];
 			$('#w_avg').text(average);
-			data.datasets[2].push(average);
+			if (average)
+				data.datasets[2].data.push(average);
 		}, 'json');
 		
 	}
@@ -106,8 +129,9 @@ var Chartdata = {
 			{
 				current = response[0][1];
 				$('#current').text(current);
+				data.datasets[2].data.push(current);
 			}
-			data.datasets[2].push(current);
+			
 		}, 'json');
 		
 	}
@@ -127,17 +151,60 @@ var Chartdata = {
 	
 }
 
+<<<<<<< HEAD
+=======
+var loaded = 0;
+var data = {
+	labels : ["January","February","March","April","May","June","July"],
+	datasets : [
+	  {
+		 fillColor : "rgba(220,220,220,0.5)",   //LOW HIGH OPEN
+		 strokeColor : "rgba(220,220,220,1)",   //bt past
+		 data : []
+	  },
+	  {
+		 fillColor : "rgba(151,187,205,0.5)",
+		 strokeColor : "rgba(151,187,205,1)",    //bt current
+		 data : []
+	  },
+	  {
+		 fillColor : "rgba(151,187,205,0.5)",
+		 strokeColor : "rgba(151,187,205,1)",    //comp past
+		 data : []
+	  },
+	  {
+		 fillColor : "rgba(151,187,205,0.5)",
+		 strokeColor : "rgba(151,187,205,1)",     //comp current
+		 data : []
+	  }
+   ]
+}
+
+//  0   is HIGH
+//  1   is OPEN
+//  2   is LOW
+
+
+>>>>>>> 4e2b444c88b978dd6ac8feb30924b32da9422853
 // my code
 $(function() {
+	
+	
 	$.get('http://localhost/BoilerMakeBitcoinProject/Overstock_data.txt', function(res) {
 		var myvar = res;
 		var overstock_arr = find_hist(myvar);
 		$('#overstock_past').val(overstock_arr);
+		console.log("first");
 		loaded += 1;
 		
-		data.datasets[0].push(overstock_arr[0]);
-		data.datasets[1].push(overstock_arr[1]);
-		data.datasets[3].push(overstock_arr[2]);
+		if (overstock_arr[1])
+			data.datasets[2].data.push(parseInt(overstock_arr[1]));
+			
+		if (overstock_arr[0])
+			data.datasets[2].data.push(parseInt(overstock_arr[0]));
+			
+		if (overstock_arr[2])
+			data.datasets[2].data.push(parseInt(overstock_arr[2]));
 	});
 	
 	$.get('http://localhost/BoilerMakeBitcoinProject/Tesla_data.txt', function(res) {
@@ -145,10 +212,15 @@ $(function() {
 		var tesla_arr = find_hist(myvar);
 		$('#tesla_past').val(tesla_arr);
 		loaded += 1;
-		
-		data.datasets[0].push(tesla_arr[0]);
-		data.datasets[1].push(tesla_arr[1]);
-		data.datasets[3].push(tesla_arr[2]);
+		console.log("second");
+		if (tesla_arr[1])
+			data.datasets[2].data.push(parseInt(tesla_arr[1]));
+			
+		if (tesla_arr[0])
+			data.datasets[2].data.push(parseInt(tesla_arr[0]));
+			
+		if (tesla_arr[2])
+			data.datasets[2].data.push(parseInt(tesla_arr[2]));
 	});
 	
 	$.get('http://localhost/BoilerMakeBitcoinProject/Zynga_data.txt', function(res) {
@@ -156,10 +228,17 @@ $(function() {
 		var zynga_arr = find_hist(myvar);
 		$('#zynga_past').val(zynga_arr);
 		loaded += 1;
+		console.log("third");
+		if (zynga_arr[0])
+			data.datasets[3].data.push(parseInt(zynga_arr[0]));
+			
+		if (zynga_arr[1])
+			data.datasets[3].data.push(parseInt(zynga_arr[1]));
+			
+		if (zynga_arr[2])
+			data.datasets[3].data.push(parseInt(zynga_arr[2]));
 		
-		data.datasets[0].push(zynga_arr[0]);
-		data.datasets[1].push(zynga_arr[1]);
-		data.datasets[3].push(zynga_arr[2]);
+		console.log(data);
 	});
 	
 	function find_hist(file) 
@@ -180,7 +259,7 @@ $(function() {
 			offset += 1;	
 		}
 		
-		var low = file.slice(index + 7, index + offset + 7);
+		var low = file.slice(index + 6, index + offset + 7);
 		
 		index = file.indexOf("OPEN = ");
 		offset = 0;
@@ -191,15 +270,15 @@ $(function() {
 		
 		var opn = file.slice(index + 7, index + offset + 7);
 		
-		if (loaded == 3)
-		{
-			grab_bitcoin_data();	
-		}
+		
+			var ctx = new Chart($("#myChart").get(0).getContext("2d")).Bar(data);
+		
+		grab_bitcoin_data();
 		
 		return [high, low, opn];
 	}
 	
-	var ctx = new Chart($("#myChart").get(0).getContext("2d")).Bar(data);
+	
 });
 
 
