@@ -26,8 +26,12 @@
         #ticker {
             bottom:0px;
             height:30%;
-            float:left;
+            width:100%;
+            float:right;
             clear:both;
+        }
+        
+        canvas {
         }
         /*
         .marquee p {  
@@ -84,6 +88,8 @@
         // my code
         // my code
 	</script>
+    <script src="Chart.js/Chart.js"></script>
+    <meta name = "viewport" content = "initial-scale = 1, user-scalable = no">
 </head>
 <body>
     <!-- my code -->
@@ -96,7 +102,41 @@
             <input type="submit" value="View data">
         </form>
     </div>
-    <div id="graph">graph goes here</div>
+    <div id="graph">
+        <canvas id="myChart" width="400" height="400">
+    </div>
+    <script>
+        /*
+        company = "ZNGA", date="20140206"
+        $.ajax({
+            type:'POST',
+            url: "SimpleHistoryExample.py 10.8.8.1 "+company+" "+date,
+            success: function(response){
+                console.log(response);
+            }
+        });
+        */
+        var data = {
+            labels : ["January","February","March","April","May","June","July"],
+            datasets : [
+		      {
+			     fillColor : "rgba(220,220,220,0.5)",
+			     strokeColor : "rgba(220,220,220,1)",
+			     data : [65,59,90,81,56,55,40]
+		      },
+		      {
+			     fillColor : "rgba(151,187,205,0.5)",
+			     strokeColor : "rgba(151,187,205,1)",
+			     data : [28,48,40,19,96,27,100]
+		      }
+	       ]
+        }
+        /*var ctx = document.getElementById("myChart").getContext("2d");
+        var myNewChart = new Chart(ctx).Bar(data);*/
+        console.log($("#myChart"));
+        var ctx = new Chart($("#myChart").get(0).getContext("2d")).Bar(data);
+        
+    </script>
     <div id="ticker">
         <!--<ul id="ticker01">
             <li>Cool things app. </li>
@@ -111,12 +151,12 @@
     
     <button type="button" onclick="grab_bitcoin_data()">Enter</button>
     
-    <div id="open"></div>
-    <div id="close"></div>
-    <div id="high"></div>
-    <div id="low"></div>
-    <div id="w_avg"></div>
-    <div id="current"></div>
+    <div id="open">1.</div>
+    <div id="close">2.</div>
+    <div id="high">3.</div>
+    <div id="low">4.</div>
+    <div id="w_avg">5.</div>
+    <div id="current">6.</div>
     
     
     

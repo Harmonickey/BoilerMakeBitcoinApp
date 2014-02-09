@@ -13,26 +13,30 @@ function grab_bitcoin_data()
 		sort_order: 'desc',
 		auth_token: auth_token
 	};
-	
-	var response = $.post(url_ochl, data, function(response) {
+    
+	$.get(url_ochl, data, function(response) {
 		console.log(response);
-		$('#open').text(response.data[0]["Open"]);
-		$('#Close').text(response.data[0]["Close"]);
-		$('#High').text(response.data[0]["High"]);
-		$('#Low').text(response.data[0]["Low"]);
+		$('#open').text(response.data[0][1]);
+		$('#close').text(response.data[0][4]);
+		$('#high').text(response.data[0][2]);
+		$('#low').text(response.data[0][3]);
 	}, 'json');
 	
-	$('#w_avg').text(grab_weeklyavg());
-	$('#current').text(grab_current());
+	grab_weeklyavg();
+	grab_current();
 	
 	function grab_weeklyavg()
-	{
-		var average = 0;
-		$.get(url_weighted, data, function(response) {
-			average = response['USD']['7d'];
+	{  
+		var average = "";
+		$.get(url_weighted, function(response) {
+            
+			average += response.USD['7d'];
+            console.log(average);
+            //console.log(response[0]);
+            //console.log(response[1]);
+            //console.log(response.USD['7d']);
+            $('#w_avg').text(average);
 		}, 'json');
-		
-		return average;
 	}
 	
 	function grab_current()
@@ -47,10 +51,12 @@ function grab_bitcoin_data()
 		};
 		
 		$.get(url_chain, data, function(response) {
+            console.log(response);
 			current = response.data[0][1];
+            $("#current").text(current);
 		}, 'json');
 		
-		return current;
+		//return current;
 	}
 	
 	function get_today()
